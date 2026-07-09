@@ -289,10 +289,12 @@
     flipCardBack.classList.toggle('is-spy', isSpy && !isBlindSpy);
 
     if (isSpy && !isBlindSpy) {
+      const categoryLine = `<div class="role-category">Category: ${escapeHtml(state.wordCategory)}</div>`;
       flipCardBack.innerHTML = `
         <div class="role-icon">🕵️</div>
         <div class="role-spy-text">You are the SPY!</div>
-        <div class="role-hint">You don't know the secret word. Listen carefully and try to blend in without getting caught.</div>
+        ${categoryLine}
+        <div class="role-hint">You don't know the secret word. Use the category to blend in and avoid getting caught.</div>
       `;
     } else {
       const wordToShow = isBlindSpy ? state.decoyWord : state.word;
