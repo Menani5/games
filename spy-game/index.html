@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>Spy / Imposter Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="game-nav">
+      <a href="../index.html">🏠 Home</a>
+      <a href="../tic-tac-toe/index.html">🎮 Tic Tac Toe</a>
+      <a href="index.html" class="active">🕵️ Spy Game</a>
+    </nav>
+
+    <h1>Guess the Spy</h1>
+
+    <!-- ---------------- SETUP SCREEN ---------------- -->
+    <section class="screen active" id="setupScreen">
+      <p class="subtitle">Pass one phone around. Everyone but the spy gets the secret word — find the spy before time runs out!</p>
+
+      <div class="settings-panel">
+        <div class="setting">
+          <label for="playerCount">Number of Players</label>
+          <div class="stepper">
+            <button type="button" class="stepper-btn" data-target="playerCount" data-step="-1" aria-label="Decrease players">−</button>
+            <input type="number" id="playerCount" min="3" max="12" value="4" inputmode="numeric">
+            <button type="button" class="stepper-btn" data-target="playerCount" data-step="1" aria-label="Increase players">+</button>
+          </div>
+        </div>
+
+        <div class="setting">
+          <label for="spyCount">Number of Spies</label>
+          <div class="stepper">
+            <button type="button" class="stepper-btn" data-target="spyCount" data-step="-1" aria-label="Decrease spies">−</button>
+            <input type="number" id="spyCount" min="1" max="4" value="1" inputmode="numeric">
+            <button type="button" class="stepper-btn" data-target="spyCount" data-step="1" aria-label="Increase spies">+</button>
+          </div>
+        </div>
+
+        <div class="setting setting-wide">
+          <label for="categorySelect">Word Category</label>
+          <select id="categorySelect"></select>
+        </div>
+
+        <div class="setting setting-wide">
+          <label>Spy Awareness</label>
+          <div class="toggle-group" id="spyAwarenessToggle">
+            <button type="button" class="toggle-btn active" data-value="knows">🕵️ Spy Knows</button>
+            <button type="button" class="toggle-btn" data-value="blind">😶 Spy Plays Blind</button>
+          </div>
+          <p class="setting-note" id="spyAwarenessNote">The spy is told they're the spy and must bluff without knowing the word.</p>
+        </div>
+      </div>
+
+      <div class="names-panel" id="namesPanel">
+        <h2 class="panel-title">Player Names <span class="panel-hint">(optional)</span></h2>
+        <div class="names-grid" id="namesGrid"></div>
+      </div>
+
+      <div class="setup-error" id="setupError"></div>
+
+      <button id="startBtn" class="primary-btn">Start Game</button>
+    </section>
+
+    <!-- ---------------- REVEAL SCREEN ---------------- -->
+    <section class="screen" id="revealScreen">
+      <div class="progress-pill" id="revealProgress">Player 1 of 4</div>
+
+      <h2 class="pass-heading">Pass the phone to</h2>
+      <div class="pass-name" id="passPlayerName">Player 1</div>
+
+      <div class="card-stage">
+        <div class="flip-card" id="flipCard">
+          <div class="flip-card-inner">
+            <div class="flip-card-face flip-card-front">
+              <div class="lock-icon">🔒</div>
+              <p>Make sure no one else is looking</p>
+              <button class="primary-btn reveal-btn" id="revealBtn">Tap to Reveal</button>
+            </div>
+            <div class="flip-card-face flip-card-back" id="flipCardBack">
+              <!-- filled dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="secondary-btn" id="hideContinueBtn" style="display:none;">Hide &amp; Pass to Next Player</button>
+    </section>
+
+    <!-- ---------------- DISCUSSION SCREEN ---------------- -->
+    <section class="screen" id="discussionScreen">
+      <div class="discussion-icon">🕵️‍♂️💬</div>
+      <h2>Discussion Time!</h2>
+      <p class="subtitle">Everyone has seen their role. Take turns describing the word (without saying it) and figure out who the spy is.</p>
+
+      <div class="timer-panel">
+        <div class="timer-display" id="timerDisplay">03:00</div>
+        <div class="timer-controls">
+          <button class="secondary-btn small-btn" id="timerMinus">−1 min</button>
+          <button class="primary-btn small-btn" id="timerToggle">Start Timer</button>
+          <button class="secondary-btn small-btn" id="timerPlus">+1 min</button>
+        </div>
+      </div>
+
+      <button class="danger-btn" id="revealSpyBtn">Reveal the Spy</button>
+    </section>
+
+    <!-- ---------------- RESULT SCREEN ---------------- -->
+    <section class="screen" id="resultScreen">
+      <div class="result-icon" id="resultIcon">🕵️</div>
+      <h2>The Spy Was...</h2>
+      <div class="spy-reveal-name" id="spyRevealName">Player 2</div>
+
+      <div class="word-reveal-card">
+        <span class="word-reveal-label">Secret Word</span>
+        <span class="word-reveal-value" id="wordRevealValue">Pizza</span>
+      </div>
+
+      <div class="word-reveal-card decoy-card" id="decoyWordCard" style="display:none;">
+        <span class="word-reveal-label">The Spy Was Told</span>
+        <span class="word-reveal-value" id="decoyWordValue">Pasta</span>
+      </div>
+
+      <div class="result-actions">
+        <button class="primary-btn" id="playAgainSpyBtn">Play Again (Same Players)</button>
+        <button class="secondary-btn" id="newSetupBtn">New Setup</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
