@@ -1,0 +1,143 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0f0f1a;
+  color: #e0e0e0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px calc(40px + env(safe-area-inset-bottom));
+}
+
+.container {
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  background: linear-gradient(135deg, #00e5ff, #d500f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+}
+
+.subtitle {
+  color: #a8a8c0;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ---------- Game Grid ---------- */
+
+.game-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #e0e0e0;
+  background: #1a1a2e;
+  border: 1px solid #2a2a4a;
+  border-radius: 16px;
+  padding: 28px 20px;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  border-color: #00e5ff;
+  box-shadow: 0 8px 24px rgba(0, 229, 255, 0.18);
+}
+
+.game-card:active {
+  transform: translateY(-1px);
+}
+
+.game-card-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.game-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.game-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.game-card-desc {
+  font-size: 0.85rem;
+  color: #a8a8c0;
+  line-height: 1.45;
+}
+
+.game-card-cta {
+  margin-top: 6px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #00e5ff, #00b0ff);
+  color: #0f0f1a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s;
+}
+
+.game-card:hover .game-card-cta {
+  transform: translateX(2px);
+}
+
+.arrow {
+  transition: transform 0.15s;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 560px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .game-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-card {
+    padding: 20px 18px;
+  }
+
+  .game-card-icon {
+    font-size: 2.4rem;
+  }
+}
